@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+model User {
+  id        String   @id @default(uuid()) @db.Char(36)
+  nome      String   @db.VarChar(50)
+  login     String   @db.VarChar(20)
+  senha     String   @db.Char(60)
+  email     String   @unique @db.VarChar(50)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("usuarios")
+}
+
+model ChangeRequest {
+  id                  String   @id @default(uuid()) @db.Char(36)
+  nomeSolicitante     String   @db.VarChar(50)
+  nomeSistema         String   @db.VarChar(50)
+  data                DateTime @default(now())
+  descricaoRequisicao String   @db.VarChar(500)
+  statusRequisicao    Int      @db.Int()
+  anexo               Bytes    @db.Blob()
+  dataFechamento      DateTime @db.Date()
+
+  @@map("requisicoes")
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
