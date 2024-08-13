@@ -4,7 +4,7 @@ services:
     build:
       context: .
     volumes:
-      - ./backend:/app
+      - .:/app
     ports:
       - ${BACKEND_PORT}:${BACKEND_PORT}
   db:

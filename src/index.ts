@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 import session from "express-session";
 
 import swaggerUi from "swagger-ui-express";
-import swaggerFile from "./swagger-output.json";
+//import swaggerFile from "./swagger-output.json";
 
 dotenv.config();
 validateEnv();
@@ -35,7 +35,7 @@ declare module "express-session" {
 
 app.use(express.json());
 
-app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+//app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use(router);
 app.listen(PORT, () => {

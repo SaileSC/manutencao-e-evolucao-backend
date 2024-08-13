@@ -1,3 +1,3 @@
-import { Usuario } from "@prisma/client";
+import { User } from "@prisma/client";
 
-export type loginDto = Pick<Usuario, "email" | "senha">
+export type loginDto = Pick<User, "email" | "senha">;

@@ -22,14 +22,14 @@ model User {
 }
 
 model ChangeRequest {
-  id                  String   @id @default(uuid()) @db.Char(36)
-  nomeSolicitante     String   @db.VarChar(50)
-  nomeSistema         String   @db.VarChar(50)
-  data                DateTime @default(now())
-  descricaoRequisicao String   @db.VarChar(500)
-  statusRequisicao    Int      @db.Int()
-  anexo               Bytes    @db.Blob()
-  dataFechamento      DateTime @db.Date()
+  id                  String    @id @default(uuid()) @db.Char(36)
+  nomeSolicitante     String    @db.VarChar(50)
+  nomeSistema         String    @db.VarChar(50)
+  data                DateTime  @default(now())
+  descricaoRequisicao String    @db.VarChar(500)
+  statusRequisicao    Int?      @db.Int()
+  anexo               Bytes?    @db.Blob()
+  dataFechamento      DateTime? @db.Date()
 
   @@map("requisicoes")
 }
