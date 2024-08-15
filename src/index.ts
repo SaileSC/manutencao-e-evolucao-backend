@@ -5,15 +5,18 @@ import router from "./router";
 import cookieParser from "cookie-parser";
 import { v4 as uuidv4 } from "uuid";
 import session from "express-session";
+import cors from "cors";
 
 import swaggerUi from "swagger-ui-express";
 //import swaggerFile from "./swagger-output.json";
 
 dotenv.config();
 validateEnv();
+const PORT = process.env.BACKEND_PORT ?? 3333;
 
 const app = express();
-const PORT = process.env.BACKEND_PORT ?? 3333;
+
+app.use(cors());
 
 app.use(cookieParser());
 

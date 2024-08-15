@@ -44,28 +44,39 @@ export const listUsers = async (): Promise<UserDto[]> => {
 
 export const getUser = async (id: string): Promise<UserDto | null> => {
   return await prisma.user.findUnique({
-    select: {
-      id: true,
-      nome: true,
-      login: true,
-      email: true,
-      createdAt: true,
-      updatedAt: true,
-    },
     where: { id },
   });
 };
 
-export const updateUser = async (
-  user: UpdateUserDto,
-  id: string
-): Promise<User> => {
+export const updateUser = async (user: UpdateUserDto): Promise<User> => {
   return await prisma.user.update({
     data: user,
-    where: { id },
+    where: {
+      id: user.id,
+    },
   });
 };
 
-export const removeUser = async (id: string): Promise<User> => {
+export const removeUser = async (id: string): Promise<UserDto> => {
   return await prisma.user.delete({ where: { id } });
+};
+
+export const findLogin = async (login: string): Promise<UserDto[]> => {
+  return await prisma.user.findMany({
+    where: {
+      login: {
+        contains: login,
+      },
+    },
+  });
+};
+
+export const findName = async (nome: string): Promise<UserDto[]> => {
+  return await prisma.user.findMany({
+    where: {
+      nome: {
+        contains: nome,
+      },
+    },
+  });
 };

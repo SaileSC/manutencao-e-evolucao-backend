@@ -6,9 +6,11 @@ import { createUsuarioScreema } from "./user.schemas";
 const router = Router();
 
 router.get("/", UserController.index);
-router.post("/", validadeBody(createUsuarioScreema), UserController.create);
+router.get("/login/:login", UserController.searchLogin);
+router.get("/name/:name", UserController.searchName);
 router.get("/:id", UserController.read);
-router.put("/:id", validadeBody(createUsuarioScreema), UserController.update);
+router.post("/", validadeBody(createUsuarioScreema), UserController.create);
+router.put("/", UserController.update);
 router.delete("/:id", UserController.remove);
 
 export default router;

@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import {
   createUser,
+  findLogin,
+  findName,
   getUser,
   listUsers,
   removeUser,
@@ -38,7 +40,7 @@ const read = async (req: Request, res: Response) => {
   try {
     const usuario = await getUser(id);
     if (!usuario)
-      res.status(StatusCodes.NOT_FOUND).json(ReasonPhrases.NOT_FOUND);
+      return res.status(StatusCodes.NOT_FOUND).json(ReasonPhrases.NOT_FOUND);
     res.status(StatusCodes.OK).json(usuario);
   } catch (err) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
@@ -46,10 +48,9 @@ const read = async (req: Request, res: Response) => {
 };
 
 const update = async (req: Request, res: Response) => {
-  const { id } = req.params;
   const user = req.body as UpdateUserDto;
   try {
-    const update = await updateUser(user, id);
+    const update = await updateUser(user);
     if (!update)
       res.status(StatusCodes.NOT_FOUND).json(ReasonPhrases.NOT_FOUND);
     res.status(StatusCodes.OK).json(update);
@@ -70,4 +71,27 @@ const remove = async (req: Request, res: Response) => {
   }
 };
 
-export default { index, create, read, update, remove };
+const searchLogin = async (req: Request, res: Response) => {
+  const { login } = req.params;
+  try {
+    const users = await findLogin(login);
+    if (!users)
+      return res.status(StatusCodes.NOT_FOUND).json(ReasonPhrases.NOT_FOUND);
+    res.status(StatusCodes.OK).json(users);
+  } catch (err) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+  }
+};
+const searchName = async (req: Request, res: Response) => {
+  const { name } = req.params;
+  try {
+    const users = await findName(name);
+    if (!users)
+      return res.status(StatusCodes.NOT_FOUND).json(ReasonPhrases.NOT_FOUND);
+    res.status(StatusCodes.OK).json(users);
+  } catch (err) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+  }
+};
+
+export default { index, create, read, update, remove, searchLogin, searchName };

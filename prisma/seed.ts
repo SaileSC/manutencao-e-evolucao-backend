@@ -14,6 +14,14 @@ const seed = async () => {
   //     dataFechamento: new Date("2024-08-20"),
   //   },
   // });
+  // const user = await prisma.user.create({
+  //   data: {
+  //     nome: "teste",
+  //     senha: "teste",
+  //     email: "teste@teste.com",
+  //     login: "teste@teste.com",
+  //   },
+  // });
 };
 
 seed()
