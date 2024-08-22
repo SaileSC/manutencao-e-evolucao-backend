@@ -7,7 +7,7 @@ export const createRequest = async (
   request: RequestCreateDTO
 ): Promise<RequestDTO> => {
   return await prisma.changeRequest.create({
-    data: request,
+    data: { ...request, statusRequisicao: 1 },
   });
 };
 
