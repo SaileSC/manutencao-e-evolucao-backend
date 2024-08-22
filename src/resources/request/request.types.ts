@@ -6,7 +6,7 @@ export type RequestDTO = Pick<
   | "nomeSolicitante"
   | "nomeSistema"
   | "descricaoRequisicao"
-  | "data"
+  | "dataCriacao"
   | "anexo"
   | "dataFechamento"
   | "statusRequisicao"
